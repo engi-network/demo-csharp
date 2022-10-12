@@ -6,11 +6,18 @@ namespace Prime.Services
     {
         public bool IsPrime(int candidate)
         {
-            if (candidate == 1)
+            if (candidate < 2)
             {
                 return false;
             }
-            throw new NotImplementedException("Not fully implemented.");
+            for (int i = 2; i < (int)Math.Round(Math.Sqrt(candidate)) + 1; i++)
+            {
+                if ((candidate % i) == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
