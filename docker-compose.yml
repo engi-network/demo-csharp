@@ -3,9 +3,12 @@ version: "3.9"
 services:
   tests:
     build: .
-    command: dotnet test --logger:trx -r .
+    command: dotnet test --logger "trx;LogFileName=$ENGI_WORKING_DIR/dotnet_test.trx" -r .
     volumes:
-      # bind mount a directory to share the output of the test runner
-      - type: bind
-        source: .
-        target: /code
+      - type: volume
+        source: output
+        target: $ENGI_WORKING_DIR
+volumes:
+  output:
+    external: true
+    name: $ENGI_WORKING_VOL
